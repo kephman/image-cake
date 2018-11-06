@@ -1,0 +1,14 @@
+{
+    "name": "image-cake",
+    "version": "1.0.1",
+    "description": "Offers various tools to manipulate, view and manage images.",
+    "private": true,
+    "scripts": {
+        "start": "node ./src/index.js"
+    },
+    "author": "kephman",
+    "license": "UNLICENSED",
+    "devDependencies": {
+        "eslint": "^5.8.0"
+    }
+}

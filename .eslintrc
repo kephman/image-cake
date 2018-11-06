@@ -1,0 +1,13 @@
+{
+    "extends": [
+        "eslint:recommended"
+    ],
+    "rules": {
+        "no-console": "off",
+        "semi": "error"
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    }
+}
