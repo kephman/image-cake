@@ -5,6 +5,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Dist
+dist
+
 # Runtime data
 pids
 *.pid
@@ -65,3 +68,6 @@ typings/
 
 # npm config
 .npmrc
+
+#package-lock
+package-lock.json
