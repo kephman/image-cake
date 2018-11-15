@@ -4,6 +4,7 @@ import packageValues from '../package.json';
 import {
     reactRoute,
     scriptsRoute,
+    pojRoute,
 } from './routes';
 
 const { version = '1.0.0' } = packageValues || {};
@@ -31,10 +32,24 @@ const buildReactPage = (title, reactString) => (
     </body>
     </html>`
 );
+const buildPlainJSPage = title => (
+    `<!doctype html>
+    <html>
+    <head>
+        <title>${title}</title>
+        <script type="application/javascript" src="./scripts/clientPlain.${version}.bundle.js" async></script>
+    </head>
+    <body>
+        <div id="playground">plainJS</div>
+    </body>
+    </html>`
+);
+
 
 Promise.resolve(registration).then(() => {
     server.route(reactRoute(buildReactPage));
     server.route(scriptsRoute);
+    server.route(pojRoute(buildPlainJSPage));
 }).then(() => {
     server.start();
 }).then(() => {

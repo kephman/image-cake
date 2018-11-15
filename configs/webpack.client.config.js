@@ -10,6 +10,7 @@ module.exports = {
     context: __dirname,
     entry: {
         client: '../src/client.js',
+        clientPlain: '../src/clientPlainJS.js',
     },
     optimization: {
         minimize: false,
