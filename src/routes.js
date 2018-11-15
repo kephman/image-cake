@@ -25,6 +25,23 @@ export const reactRoute = buildReactPage => ({
     },
 });
 
+export const pojRoute = buildPlainJSPage => ({
+    method: 'GET',
+    path: '/playground',
+    handler(request, h) {
+        const { error } = request || {};
+        const { message: errorMessage = '' } = error || {};
+
+        if (typeof errorMessage === 'string' && errorMessage.length) {
+            return h.response(errorMessage).code(500);
+        }
+
+        const content = buildPlainJSPage('Image Cake Sandbox');
+
+        return h.response(content).code(200);
+    },
+});
+
 export const scriptsRoute = ({
     method: 'GET',
     path: '/scripts/{params*}',
@@ -38,4 +55,5 @@ export const scriptsRoute = ({
 export default {
     reactRoute,
     scriptsRoute,
+    pojRoute,
 };
