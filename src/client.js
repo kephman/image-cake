@@ -1,17 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import App from './pages/App';
 
-function alertWord(word) {
-    if (typeof window === 'object') {
-        window.alert(word); // eslint-disable-line
-    }
-}
-
-function getContainer(content) {
-    return (
-        <div>
-            { typeof content === 'string' ? content : 'no content'}
-        </div>
-    );
-}
-
-export default { alertWord, getContainer };
+ReactDOM.render(
+    <Router>
+        <App />
+    </Router>,
+    document.getElementById('react-root'),
+);

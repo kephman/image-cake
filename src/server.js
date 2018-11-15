@@ -1,8 +1,42 @@
-const http = require('http');
+import hapi from 'hapi';
+import inert from 'inert';
+import packageValues from '../package.json';
+import {
+    reactRoute,
+    scriptsRoute,
+} from './routes';
 
-http.createServer((request, response) => {
-    response.writeHead(200, { 'Content-Type': 'text/plain' });
-    response.end('Hello World\n');
-}).listen(8000);
+const { version = '1.0.0' } = packageValues || {};
+const server = hapi.server({
+    port: 8000,
+    router: {
+        isCaseSensitive: true,
+        stripTrailingSlash: false,
+    },
+});
 
-console.log('Server running at http://127.0.0.1:8000/'); // eslint-disable-line
+const registration = server.register(inert);
+const { info = {} } = server;
+const { uri } = info || {};
+
+const buildReactPage = (title, reactString) => (
+    `<!doctype html>
+    <html>
+    <head>
+        <title>${title}</title>
+        <script type="application/javascript" src="./scripts/client.${version}.bundle.js" async></script>
+    </head>
+    <body>
+        <div id="react-root">${reactString}</div>
+    </body>
+    </html>`
+);
+
+Promise.resolve(registration).then(() => {
+    server.route(reactRoute(buildReactPage));
+    server.route(scriptsRoute);
+}).then(() => {
+    server.start();
+}).then(() => {
+    console.log(`Server running: ${uri}`); // eslint-disable-line
+});

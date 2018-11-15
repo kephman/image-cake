@@ -14,7 +14,7 @@ module.exports = {
     },
     output: {
         path: distPath,
-        filename: '[name].[hash:10].bundle.js',
+        filename: '[name].bundle.js',
     },
     mode: 'production',
     module: {
